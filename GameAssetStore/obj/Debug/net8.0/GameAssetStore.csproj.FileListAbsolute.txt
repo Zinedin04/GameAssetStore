@@ -154,3 +154,4 @@ C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\re
 C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\GameAssetStore.pdb
 C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\GameAssetStore.genruntimeconfig.cache
 C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\ref\GameAssetStore.dll
+C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\GameAssetStore.sourcelink.json
