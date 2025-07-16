@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using GameAssetStore.Models;
 
 namespace GameAssetStore.Data
 {
@@ -9,5 +10,7 @@ namespace GameAssetStore.Data
             : base(options)
         {
         }
+        public DbSet<GameAssetStore.Models.Asset> Asset { get; set; } = default!;
+        public DbSet<GameAssetStore.Models.Store> Store { get; set; } = default!;
     }
 }
