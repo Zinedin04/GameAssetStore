@@ -12,5 +12,13 @@ namespace GameAssetStore.Data
         }
         public DbSet<GameAssetStore.Models.Asset> Asset { get; set; } = default!;
         public DbSet<GameAssetStore.Models.Store> Store { get; set; } = default!;
+        public DbSet<GameAssetStore.Models.User> User { get; set; } = default!;
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<Asset>().ToTable("Asset");
+            builder.Entity<Store>().ToTable("Store");
+            builder.Entity<User>().ToTable("User");
+        }
     }
 }
