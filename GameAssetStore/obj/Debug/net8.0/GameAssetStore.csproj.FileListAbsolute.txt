@@ -136,12 +136,6 @@ C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\sc
 C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\staticwebassets\msbuild.GameAssetStore.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\staticwebassets\msbuild.GameAssetStore.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\staticwebassets\msbuild.build.GameAssetStore.props
-C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.GameAssetStore.props
-C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.GameAssetStore.props
-C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\GameAsse.FB27021C.Up2Date
 C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\GameAssetStore.dll
@@ -271,3 +265,8 @@ C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\bin\Debug\net8.0\ru
 C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
+C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\rjimswa.dswa.cache.json
+C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+C:\Users\Korisnik\source\repos\GameAssetStore\GameAssetStore\obj\Debug\net8.0\staticwebassets.build.json.cache
