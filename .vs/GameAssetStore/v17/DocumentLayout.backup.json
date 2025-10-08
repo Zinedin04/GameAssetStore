@@ -3,20 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|c:\\users\\korisnik\\source\\repos\\gameassetstore\\gameassetstore\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|solutionrelative:gameassetstore\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|c:\\users\\korisnik\\source\\repos\\gameassetstore\\gameassetstore\\views\\assets\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|solutionrelative:gameassetstore\\views\\assets\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|c:\\users\\korisnik\\source\\repos\\gameassetstore\\gameassetstore\\views\\stores\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|solutionrelative:gameassetstore\\views\\stores\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|c:\\users\\korisnik\\source\\repos\\gameassetstore\\gameassetstore\\controllers\\assetscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|solutionrelative:gameassetstore\\controllers\\assetscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|c:\\users\\korisnik\\source\\repos\\gameassetstore\\gameassetstore\\models\\store.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|solutionrelative:gameassetstore\\models\\store.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|c:\\users\\korisnik\\source\\repos\\gameassetstore\\gameassetstore\\views\\assets\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|solutionrelative:gameassetstore\\views\\assets\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,58 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Stores\\Index.cshtml",
-              "RelativeDocumentMoniker": "GameAssetStore\\Views\\Stores\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Stores\\Index.cshtml",
-              "RelativeToolTip": "GameAssetStore\\Views\\Stores\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Assets\\Create.cshtml",
+              "RelativeDocumentMoniker": "GameAssetStore\\Views\\Assets\\Create.cshtml",
+              "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Assets\\Create.cshtml",
+              "RelativeToolTip": "GameAssetStore\\Views\\Assets\\Create.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABgAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-25T10:19:58.455Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AssetsController.cs",
-              "DocumentMoniker": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Controllers\\AssetsController.cs",
-              "RelativeDocumentMoniker": "GameAssetStore\\Controllers\\AssetsController.cs",
-              "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Controllers\\AssetsController.cs",
-              "RelativeToolTip": "GameAssetStore\\Controllers\\AssetsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-25T10:19:38.561Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Store.cs",
-              "DocumentMoniker": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Models\\Store.cs",
-              "RelativeDocumentMoniker": "GameAssetStore\\Models\\Store.cs",
-              "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Models\\Store.cs",
-              "RelativeToolTip": "GameAssetStore\\Models\\Store.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T08:31:49.67Z",
+              "WhenOpened": "2025-10-06T20:10:06.791Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Program.cs",
-              "RelativeDocumentMoniker": "GameAssetStore\\Program.cs",
-              "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Program.cs",
-              "RelativeToolTip": "GameAssetStore\\Program.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAswCMAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-16T20:03:25.006Z",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Assets\\Index.cshtml",
+              "RelativeDocumentMoniker": "GameAssetStore\\Views\\Assets\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Assets\\Index.cshtml",
+              "RelativeToolTip": "GameAssetStore\\Views\\Assets\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-25T10:24:31.079Z",
               "EditorCaption": ""
             }
           ]
