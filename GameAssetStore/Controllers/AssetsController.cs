@@ -13,7 +13,8 @@ namespace GameAssetStore.Controllers
     public class AssetsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+        private readonly IHttpClientFactory _clientFactory;
+        private readonly IConfiguration _config;
         public AssetsController(ApplicationDbContext context)
         {
             _context = context;
@@ -53,10 +54,37 @@ namespace GameAssetStore.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Url,Price")] Asset asset)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Url,Price")] Asset asset, IFormFile file)
         {
             if (ModelState.IsValid)
             {
+                if (file == null)
+                    return BadRequest("No file");
+
+                using var memoryStream = new MemoryStream();
+                    await file.CopyToAsync(memoryStream);
+                    var fileBytes = memoryStream.ToArray();
+                    var base64Content = Convert.ToBase64String(fileBytes);
+
+                string folder;
+                var extension = Path.GetExtension(file.FileName).ToLower();
+                if (extension == ".obj") folder = "assets/obj";
+                else if (extension == ".fbx") folder = "assets/fbx";
+                else folder = "assets/other"; // fallback za druge tipove
+
+                var filePath = $"{folder}/{file.FileName}";
+                var owner = _config["Github:Owner"];
+                var repo = _config["Github:Repo"];
+                var token = _config["Github:Token"];
+
+                var apiUrl = $"https://api.github.com/repos/{owner}/{repo}/contents/{filePath}";
+
+                var body = new
+                {
+                    message = $"Upload{file.FileName} from web app",
+                    content = base64Content
+                };
+
                 _context.Add(asset);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
