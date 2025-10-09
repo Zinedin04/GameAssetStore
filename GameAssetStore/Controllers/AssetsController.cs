@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GameAssetStore.Data;
 using GameAssetStore.Models;
+using System.Text.Json;
+using System.Text;
+using System.Diagnostics;
 
 namespace GameAssetStore.Controllers
 {
@@ -15,9 +18,11 @@ namespace GameAssetStore.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IHttpClientFactory _clientFactory;
         private readonly IConfiguration _config;
-        public AssetsController(ApplicationDbContext context)
+        public AssetsController(ApplicationDbContext context, IHttpClientFactory clientFactory, IConfiguration config)
         {
             _context = context;
+            _clientFactory = clientFactory;
+            _config = config;
         }
 
         // GET: Assets
@@ -54,17 +59,30 @@ namespace GameAssetStore.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Url,Price")] Asset asset, IFormFile file)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price")] Asset asset, IFormFile file)
         {
+
+            if (file == null || file.Length == 0)
+                {
+                Debug.WriteLine("aaaa uso u file if");
+                ModelState.AddModelError(string.Empty, "Please select a file to upload.");
+                    return View(asset);
+                }
+            if (!ModelState.IsValid)
+            {
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    Debug.WriteLine($"Model error: {error.ErrorMessage}");
+                }
+            }
+            Debug.WriteLine("aaaa");
             if (ModelState.IsValid)
             {
-                if (file == null)
-                    return BadRequest("No file");
-
+                Debug.WriteLine("aaaa uso u model if");
                 using var memoryStream = new MemoryStream();
-                    await file.CopyToAsync(memoryStream);
-                    var fileBytes = memoryStream.ToArray();
-                    var base64Content = Convert.ToBase64String(fileBytes);
+                await file.CopyToAsync(memoryStream);
+                var fileBytes = memoryStream.ToArray();
+                var base64Content = Convert.ToBase64String(fileBytes);
 
                 string folder;
                 var extension = Path.GetExtension(file.FileName).ToLower();
@@ -84,6 +102,22 @@ namespace GameAssetStore.Controllers
                     message = $"Upload{file.FileName} from web app",
                     content = base64Content
                 };
+
+                var client = _clientFactory.CreateClient();
+                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+                client.DefaultRequestHeaders.Add("User-Agent", "GameAssetApp");
+
+                var json = JsonSerializer.Serialize(body);
+                var response = await client.PutAsync(apiUrl, new StringContent(json, Encoding.UTF8, "application/json"));
+                var resultJson = await response.Content.ReadAsStringAsync();
+                System.Diagnostics.Debug.WriteLine("GitHub response:");
+                System.Diagnostics.Debug.WriteLine(resultJson);
+
+                if (!response.IsSuccessStatusCode)
+                    return BadRequest($"Github upload failed: {resultJson}");  
+
+                using var doc = JsonDocument.Parse(resultJson);
+                asset.Url = doc.RootElement.GetProperty("content").GetProperty("html_url").GetString();
 
                 _context.Add(asset);
                 await _context.SaveChangesAsync();
