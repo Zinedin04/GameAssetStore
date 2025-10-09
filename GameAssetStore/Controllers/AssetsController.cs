@@ -64,21 +64,12 @@ namespace GameAssetStore.Controllers
 
             if (file == null || file.Length == 0)
                 {
-                Debug.WriteLine("aaaa uso u file if");
                 ModelState.AddModelError(string.Empty, "Please select a file to upload.");
                     return View(asset);
                 }
-            if (!ModelState.IsValid)
-            {
-                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-                {
-                    Debug.WriteLine($"Model error: {error.ErrorMessage}");
-                }
-            }
-            Debug.WriteLine("aaaa");
+            
             if (ModelState.IsValid)
             {
-                Debug.WriteLine("aaaa uso u model if");
                 using var memoryStream = new MemoryStream();
                 await file.CopyToAsync(memoryStream);
                 var fileBytes = memoryStream.ToArray();
@@ -110,8 +101,6 @@ namespace GameAssetStore.Controllers
                 var json = JsonSerializer.Serialize(body);
                 var response = await client.PutAsync(apiUrl, new StringContent(json, Encoding.UTF8, "application/json"));
                 var resultJson = await response.Content.ReadAsStringAsync();
-                System.Diagnostics.Debug.WriteLine("GitHub response:");
-                System.Diagnostics.Debug.WriteLine(resultJson);
 
                 if (!response.IsSuccessStatusCode)
                     return BadRequest($"Github upload failed: {resultJson}");  
@@ -201,11 +190,50 @@ namespace GameAssetStore.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var asset = await _context.Asset.FindAsync(id);
-            if (asset != null)
+            if (asset == null)
+               return NotFound();
+
+            var owner = _config["Github:Owner"];
+            var repo = _config["Github:Repo"];
+            var token = _config["Github:Token"];
+
+            var relativePath = asset.Url.Split("blob/main").Last().TrimStart('/');
+
+            var apiUrl = $"https://api.github.com/repos/{owner}/{repo}/contents/{relativePath}";
+
+            var client = _clientFactory.CreateClient();
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+            client.DefaultRequestHeaders.Add("User-Agent", "GameAssetApp");
+
+            var getResponse = await client.GetAsync(apiUrl);
+            if (!getResponse.IsSuccessStatusCode)
             {
-                _context.Asset.Remove(asset);
+                return BadRequest($"Cannot get file info: {await getResponse.Content.ReadAsStringAsync()}");
             }
 
+            var json = await getResponse.Content.ReadAsStringAsync();
+            using var doc = JsonDocument.Parse(json);
+            var sha = doc.RootElement.GetProperty("sha").GetString();
+
+            var deleteBody = new
+            {
+                message = $"Delete {relativePath} via web app",
+                sha = sha
+            };
+
+            var deleteJson = JsonSerializer.Serialize(deleteBody);
+            var deleteResponse = await client.SendAsync(new HttpRequestMessage
+            {
+                Method = HttpMethod.Delete,
+                RequestUri = new Uri(apiUrl),
+                Content = new StringContent(deleteJson, Encoding.UTF8, "application/json")
+            });
+            var deleteResult = await deleteResponse.Content.ReadAsStringAsync();
+            if (!deleteResponse.IsSuccessStatusCode)
+            {
+                return BadRequest($"GitHub delete failed: {deleteResult}");
+            }
+            _context.Asset.Remove(asset);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
