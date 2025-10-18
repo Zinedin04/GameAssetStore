@@ -10,6 +10,7 @@ using GameAssetStore.Models;
 using System.Text.Json;
 using System.Text;
 using System.Diagnostics;
+using Microsoft.Build.Evaluation;
 
 namespace GameAssetStore.Controllers
 {
@@ -106,7 +107,9 @@ namespace GameAssetStore.Controllers
                     return BadRequest($"Github upload failed: {resultJson}");  
 
                 using var doc = JsonDocument.Parse(resultJson);
-                asset.Url = doc.RootElement.GetProperty("content").GetProperty("html_url").GetString();
+                asset.Url = doc.RootElement.GetProperty("content").TryGetProperty("html_url", out var html)
+    ? html.GetString()
+    : doc.RootElement.GetProperty("html_url").GetString();
 
                 _context.Add(asset);
                 await _context.SaveChangesAsync();
@@ -147,6 +150,58 @@ namespace GameAssetStore.Controllers
             {
                 try
                 {
+                    var newFile = Request.Form.Files.FirstOrDefault();
+                    if (newFile == null || newFile.Length == 0)
+                    {
+                        return BadRequest("No file selected");
+                    }
+                    var owner = _config["Github:Owner"];
+                    var repo = _config["Github:Repo"];
+                    var token = _config["Github:Token"];
+
+                    var relativePath = asset.Url.Split("blob/main").Last().TrimStart('/');
+
+                    var apiUrl = $"https://api.github.com/repos/{owner}/{repo}/contents/{relativePath}";
+
+                    var client = _clientFactory.CreateClient();
+                    client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
+                    client.DefaultRequestHeaders.Add("User-Agent", "GameAssetApp");
+
+                    var getResponse = await client.GetAsync(apiUrl);
+                    if (!getResponse.IsSuccessStatusCode)
+                    {
+                        return BadRequest($"Cannot get file info: {await getResponse.Content.ReadAsStringAsync()}");
+                    }
+
+                    var json = await getResponse.Content.ReadAsStringAsync();
+                    using var doc = JsonDocument.Parse(json);
+                    var sha = doc.RootElement.GetProperty("sha").GetString();
+
+                    using var memoryStream = new MemoryStream();
+                    await newFile.CopyToAsync(memoryStream);
+                    var fileBytes = memoryStream.ToArray();
+                    var base64Content = Convert.ToBase64String(fileBytes);
+
+                    var updateBody = new
+                    {
+                        message = $"Update {relativePath} via web app",
+                        content = base64Content,
+                        sha = sha
+                    };
+                    var updateJson = JsonSerializer.Serialize(updateBody);
+                    var updateRequest = new HttpRequestMessage
+                    {
+                        Method = HttpMethod.Put,
+                        RequestUri = new Uri(apiUrl),
+                        Content = new StringContent(updateJson, Encoding.UTF8, "application/json")
+                    };
+
+                    var updateResponse = await client.SendAsync(updateRequest);
+                    var updateResult = await updateResponse.Content.ReadAsStringAsync();
+
+                    if (!updateResponse.IsSuccessStatusCode)
+                        return BadRequest($"GitHub update failed: {updateResult}");
+
                     _context.Update(asset);
                     await _context.SaveChangesAsync();
                 }
