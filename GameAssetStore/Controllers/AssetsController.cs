@@ -297,5 +297,21 @@ namespace GameAssetStore.Controllers
         {
             return _context.Asset.Any(e => e.Id == id);
         }
+        
+        public async Task<IActionResult> Buy(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var asset = await _context.Asset
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (asset == null)
+            {
+                return NotFound();
+            }
+            StripeConfiguration.ApiKey = ""
+            return View(asset);
+        }
     }
 }
