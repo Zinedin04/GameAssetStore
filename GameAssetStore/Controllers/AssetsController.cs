@@ -11,6 +11,8 @@ using System.Text.Json;
 using System.Text;
 using System.Diagnostics;
 using Microsoft.Build.Evaluation;
+using Stripe;
+using Stripe.V2;
 
 namespace GameAssetStore.Controllers
 {
@@ -297,7 +299,7 @@ namespace GameAssetStore.Controllers
         {
             return _context.Asset.Any(e => e.Id == id);
         }
-        
+
         public async Task<IActionResult> Buy(int? id)
         {
             if (id == null)
@@ -310,8 +312,36 @@ namespace GameAssetStore.Controllers
             {
                 return NotFound();
             }
-            StripeConfiguration.ApiKey = ""
-            return View(asset);
+            StripeConfiguration.ApiKey = "sk_test_51SK1yGLQpNBsAdrs19iQ3BnB4yPYDxDqJ1LraisMOT50yUSODhjTAcOD49a7A5b7IPhUUv79zdLk7g6lWWay9ab700fbCy7WAN";
+
+            var options = new Stripe.Checkout.SessionCreateOptions
+            {
+                SuccessUrl = "https://localhost:5001/payments/success",
+                CancelUrl = "https://localhost:5001/payments/cancel",
+                LineItems = new List<Stripe.Checkout.SessionLineItemOptions>
+        {
+            new Stripe.Checkout.SessionLineItemOptions
+            {
+                PriceData = new Stripe.Checkout.SessionLineItemPriceDataOptions
+                {
+                    UnitAmount = (long)(asset.Price * 100),
+                    Currency = "usd",
+                    ProductData = new Stripe.Checkout.SessionLineItemPriceDataProductDataOptions
+                    {
+                        Name = asset.Name
+                    },
+                },
+                Quantity = 1,
+            }
+        },
+                Mode = "payment"
+            };
+
+            var service = new Stripe.Checkout.SessionService();
+            var session = service.Create(options);
+
+            // Redirect korisnika na Stripe Checkout
+            return Redirect(session.Url);
         }
     }
 }
