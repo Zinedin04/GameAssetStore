@@ -3,24 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|c:\\users\\korisnik\\source\\repos\\gameassetstore\\gameassetstore\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|solutionrelative:gameassetstore\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|c:\\users\\korisnik\\source\\repos\\gameassetstore\\gameassetstore\\views\\assets\\success.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|solutionrelative:gameassetstore\\views\\assets\\success.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Migrations\\20260329131359_a1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:GameAssetStore\\Migrations\\20260329131359_a1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|c:\\users\\korisnik\\source\\repos\\gameassetstore\\gameassetstore\\controllers\\assetscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|solutionrelative:gameassetstore\\controllers\\assetscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Migrations\\20260329131017_a2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:GameAssetStore\\Migrations\\20260329131017_a2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Migrations\\20260329130556_a2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:GameAssetStore\\Migrations\\20260329130556_a2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|c:\\users\\korisnik\\source\\repos\\gameassetstore\\gameassetstore\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|solutionrelative:gameassetstore\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|c:\\users\\korisnik\\source\\repos\\gameassetstore\\gameassetstore\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|solutionrelative:gameassetstore\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,71 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "20260329131359_a1.cs",
-              "DocumentMoniker": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Migrations\\20260329131359_a1.cs",
-              "RelativeDocumentMoniker": "GameAssetStore\\Migrations\\20260329131359_a1.cs",
-              "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Migrations\\20260329131359_a1.cs",
-              "RelativeToolTip": "GameAssetStore\\Migrations\\20260329131359_a1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-29T13:13:59.867Z",
+              "DocumentIndex": 0,
+              "Title": "Success.cshtml",
+              "DocumentMoniker": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Assets\\Success.cshtml",
+              "RelativeDocumentMoniker": "GameAssetStore\\Views\\Assets\\Success.cshtml",
+              "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Assets\\Success.cshtml",
+              "RelativeToolTip": "GameAssetStore\\Views\\Assets\\Success.cshtml",
+              "ViewState": "AgIAABEAAAAAAAAAAAAswDsAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-03-29T17:51:26.182Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "20260329131017_a2.cs",
-              "DocumentMoniker": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Migrations\\20260329131017_a2.cs",
-              "RelativeDocumentMoniker": "GameAssetStore\\Migrations\\20260329131017_a2.cs",
-              "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Migrations\\20260329131017_a2.cs",
-              "RelativeToolTip": "GameAssetStore\\Migrations\\20260329131017_a2.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "GameAssetStore\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "GameAssetStore\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-29T13:10:17.383Z",
+              "WhenOpened": "2026-03-29T17:45:20.187Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "20260329130556_a2.cs",
-              "DocumentMoniker": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Migrations\\20260329130556_a2.cs",
-              "RelativeDocumentMoniker": "GameAssetStore\\Migrations\\20260329130556_a2.cs",
-              "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Migrations\\20260329130556_a2.cs",
-              "RelativeToolTip": "GameAssetStore\\Migrations\\20260329130556_a2.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "AssetsController.cs",
+              "DocumentMoniker": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Controllers\\AssetsController.cs",
+              "RelativeDocumentMoniker": "GameAssetStore\\Controllers\\AssetsController.cs",
+              "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Controllers\\AssetsController.cs",
+              "RelativeToolTip": "GameAssetStore\\Controllers\\AssetsController.cs",
+              "ViewState": "AgIAADUBAAAAAAAAAAAowD8BAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-29T13:05:57.021Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Program.cs",
-              "RelativeDocumentMoniker": "GameAssetStore\\Program.cs",
-              "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Program.cs",
-              "RelativeToolTip": "GameAssetStore\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T18:28:41.967Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\appsettings.json",
-              "RelativeDocumentMoniker": "GameAssetStore\\appsettings.json",
-              "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\appsettings.json",
-              "RelativeToolTip": "GameAssetStore\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwA4AAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-23T18:18:18.026Z",
+              "WhenOpened": "2026-03-29T17:37:01.239Z",
               "EditorCaption": ""
             }
           ]

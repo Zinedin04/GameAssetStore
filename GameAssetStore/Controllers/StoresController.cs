@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using GameAssetStore.Data;
+using GameAssetStore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using GameAssetStore.Data;
-using GameAssetStore.Models;
+using Stripe;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GameAssetStore.Controllers
 {
@@ -153,5 +154,6 @@ namespace GameAssetStore.Controllers
         {
             return _context.Store.Any(e => e.Id == id);
         }
+        
     }
 }

@@ -316,8 +316,8 @@ namespace GameAssetStore.Controllers
 
             var options = new Stripe.Checkout.SessionCreateOptions
             {
-                SuccessUrl = "https://localhost:5001/payments/success",
-                CancelUrl = "https://localhost:5001/payments/cancel",
+                SuccessUrl = "https://localhost:7169/payments/success?session_id={CHECKOUT_SESSION_ID}",
+                CancelUrl = "https://localhost:7169/Assets",
                 LineItems = new List<Stripe.Checkout.SessionLineItemOptions>
         {
             new Stripe.Checkout.SessionLineItemOptions
@@ -342,6 +342,15 @@ namespace GameAssetStore.Controllers
 
             // Redirect korisnika na Stripe Checkout
             return Redirect(session.Url);
+        }
+        [HttpGet("payments/success")]
+        public async Task<IActionResult> Success(string session_id)
+        {
+            var service = new Stripe.Checkout.SessionService();
+            var session = await service.GetAsync(session_id);
+
+            // Ovdje provjeriš bazu ili session
+            return View();
         }
     }
 }

@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Uplata Uspjela";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-lg text-center">
+                <div class="card-header bg-success text-white p-4">
+                    <div class="display-1">
+                        <i class="bi bi-check-circle-fill"></i> <span>✓</span>
+                    </div>
+                    <h2 class="mt-2">Hvala na kupovini!</h2>
+                </div>
+                <div class="card-body p-5">
+                    <p class="lead text-muted">
+                        Vaša transakcija je uspješno obrađena.
+                    </p>
+
+                    <p>Digitalni asset je spreman za korištenje. Potvrdu smo poslali na vašu e-mail adresu.</p>
+
+                    <div class="d-grid gap-2">
+                        <a asp-controller="Assets" asp-action="Index" class="btn btn-success btn-lg">
+                            Vrati se u trgovinu
+                        </a>
+                        <button onclick="window.print()" class="btn btn-link btn-sm text-muted">
+                            Ispiši račun (PDF)
+                        </button>
+                    </div>
+                </div>
+                <div class="card-footer bg-white text-muted">
+                    GameAssetStore &copy; @DateTime.Now.Year
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+    }
+    .display-1 {
+        font-size: 5rem;
+        animation: scaleIn 0.5s ease-out;
+    }
+    @@keyframes scaleIn {
+        0% { transform: scale(0); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+</style>
