@@ -1,48 +1,141 @@
 ﻿@model IEnumerable<GameAssetStore.Models.Asset>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Store Assets";
 }
 
-<h1>Index</h1>
+<style>
+    .store-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
-                <a asp-action="Buy" asp-route-id="@item.Id">Buy</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    .btn-create {
+        background: linear-gradient(45deg, var(--primary-neon), #00d2ff);
+        color: #000;
+        font-weight: 700;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+        .btn-create:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+            color: #000;
+        }
+
+    /* Grid Layout */
+    .asset-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 2rem;
+    }
+
+    /* Individualna Kartica */
+    .asset-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 1.5rem;
+        transition: 0.3s;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+        .asset-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: var(--primary-neon);
+            transform: scale(1.02);
+        }
+
+    .asset-name {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.25rem;
+        color: #fff;
+        margin-bottom: 0.5rem;
+    }
+
+    .asset-desc {
+        color: #a5a5b1;
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem;
+        min-height: 40px;
+    }
+
+    .asset-price {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary-neon);
+    }
+
+    .asset-actions {
+        margin-top: 1.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 1rem;
+    }
+
+        .asset-actions a {
+            font-size: 0.8rem;
+            text-decoration: none;
+            color: #fff;
+            opacity: 0.6;
+            transition: 0.2s;
+        }
+
+            .asset-actions a:hover {
+                opacity: 1;
+                color: var(--primary-neon);
+            }
+
+    .btn-buy {
+        background: rgba(0, 242, 254, 0.1);
+        border: 1px solid var(--primary-neon);
+        color: var(--primary-neon) !important;
+        padding: 5px 15px;
+        border-radius: 6px;
+        opacity: 1 !important;
+    }
+
+        .btn-buy:hover {
+            background: var(--primary-neon) !important;
+            color: #000 !important;
+        }
+</style>
+
+<div class="store-header">
+    <h1 class="m-0">Available Assets</h1>
+    <a asp-action="Create" class="btn-create text-uppercase">+ Create New</a>
+</div>
+
+<div class="asset-grid">
+    @foreach (var item in Model)
+    {
+        <div class="asset-card">
+            <div>
+                <div class="asset-name">@item.Name</div>
+                <p class="asset-desc">@item.Description</p>
+                <div class="asset-price">@item.Price <small style="font-size: 0.6em">USD</small></div>
+            </div>
+
+            <div class="asset-actions">
+                <a asp-action="Buy" asp-route-id="@item.Id" class="btn-buy">Buy Now</a>
+                <div class="ms-auto">
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <span class="text-muted mx-1">|</span>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <span class="text-muted mx-1">|</span>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

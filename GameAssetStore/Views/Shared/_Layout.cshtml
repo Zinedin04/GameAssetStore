@@ -4,47 +4,156 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - GameAssetStore</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/GameAssetStore.styles.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-neon: #00f2fe; /* Tirkizno-plava za gaming vibe */
+            --accent-purple: #7000ff;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            /* Tamni gradijent sličan onom na tvojoj slici */
+            background: radial-gradient(circle at top, #1a0b2e 0%, #090919 100%);
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Čišći Header umjesto Navbara */
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .brand-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--primary-neon);
+            text-decoration: none;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+            transition: 0.3s ease;
+        }
+
+            .brand-logo:hover {
+                color: #fff;
+                text-shadow: 0 0 20px var(--primary-neon);
+            }
+
+        /* Navigacijski linkovi */
+        .main-nav {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+            .main-nav a, .nav-link-custom {
+                text-decoration: none;
+                color: #a5a5b1;
+                font-weight: 500;
+                font-size: 0.95rem;
+                transition: 0.3s;
+            }
+
+                .main-nav a:hover {
+                    color: #fff;
+                    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+                }
+
+        /* Glavni kontejner - Stakleni efekt (umjesto bijelog Welcome bloka) */
+        .content-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+       
+
+        /* Footer stil */
+        footer {
+            margin-top: 5rem;
+            padding: 2rem 0;
+            border-top: 1px solid var(--glass-border);
+            color: #555;
+            font-size: 0.85rem;
+        }
+
+            footer a {
+                color: #777;
+                text-decoration: none;
+            }
+
+                footer a:hover {
+                    color: var(--primary-neon);
+                }
+
+        /* Bootstrap override za Login gumbe unutar parcijala */
+        .nav-item {
+            list-style: none;
+        }
+
+        .text-dark {
+            color: #a5a5b1 !important;
+        }
+
+            .text-dark:hover {
+                color: #fff !important;
+            }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GameAssetStore</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-							<a class="nav-link text-dark" asp-area="" asp-controller="Assets" asp-action="Index">Store</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
-            </div>
-        </nav>
-    </header>
+
     <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
+        <header class="site-header">
+            <a class="brand-logo" asp-area="" asp-controller="Home" asp-action="Index">
+                GameAssetStore
+            </a>
+
+            <nav>
+                <ul class="main-nav">
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-controller="Assets" asp-action="Index">Store</a></li>
+                    <li><a asp-controller="Home" asp-action="Privacy">Privacy</a></li>
+                    <partial name="_LoginPartial" />
+                </ul>
+            </nav>
+        </header>
+
+        <main role="main">
+            <div class="content-card">
+                @RenderBody()
+            </div>
         </main>
+
+        <footer class="text-center">
+            <div class="container">
+                &copy; 2025 — <strong>GameAssetStore</strong>
+                <span class="mx-2 text-muted">|</span>
+                <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a>
+            </div>
+        </footer>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - GameAssetStore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
