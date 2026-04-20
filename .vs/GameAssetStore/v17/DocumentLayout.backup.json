@@ -3,12 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|c:\\users\\korisnik\\source\\repos\\gameassetstore\\gameassetstore\\views\\assets\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|solutionrelative:gameassetstore\\views\\assets\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|c:\\users\\korisnik\\source\\repos\\gameassetstore\\gameassetstore\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|solutionrelative:gameassetstore\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|c:\\users\\korisnik\\source\\repos\\gameassetstore\\gameassetstore\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|solutionrelative:gameassetstore\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|c:\\users\\korisnik\\source\\repos\\gameassetstore\\gameassetstore\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|solutionrelative:gameassetstore\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|c:\\users\\korisnik\\source\\repos\\gameassetstore\\gameassetstore\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|solutionrelative:gameassetstore\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|c:\\users\\korisnik\\source\\repos\\gameassetstore\\gameassetstore\\views\\assets\\success.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|solutionrelative:gameassetstore\\views\\assets\\success.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|c:\\users\\korisnik\\source\\repos\\gameassetstore\\gameassetstore\\views\\assets\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|solutionrelative:gameassetstore\\views\\assets\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|c:\\users\\korisnik\\source\\repos\\gameassetstore\\gameassetstore\\views\\assets\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{C856693F-4B2E-4848-9781-54811EFEC352}|GameAssetStore\\GameAssetStore.csproj|solutionrelative:gameassetstore\\views\\assets\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -24,13 +44,52 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Assets\\Index.cshtml",
-              "RelativeDocumentMoniker": "GameAssetStore\\Views\\Assets\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Assets\\Index.cshtml",
-              "RelativeToolTip": "GameAssetStore\\Views\\Assets\\Index.cshtml",
-              "ViewState": "AgIAAGEAAAAAAAAAAAAswIwAAAAGAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "GameAssetStore\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "GameAssetStore\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-19T20:34:35.736Z",
+              "WhenOpened": "2026-04-20T09:11:45.128Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "GameAssetStore\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "GameAssetStore\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-20T09:11:38.552Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_LoginPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Shared\\_LoginPartial.cshtml",
+              "RelativeDocumentMoniker": "GameAssetStore\\Views\\Shared\\_LoginPartial.cshtml",
+              "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Shared\\_LoginPartial.cshtml",
+              "RelativeToolTip": "GameAssetStore\\Views\\Shared\\_LoginPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-20T09:11:27.685Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Success.cshtml",
+              "DocumentMoniker": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Assets\\Success.cshtml",
+              "RelativeDocumentMoniker": "GameAssetStore\\Views\\Assets\\Success.cshtml",
+              "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Assets\\Success.cshtml",
+              "RelativeToolTip": "GameAssetStore\\Views\\Assets\\Success.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-20T09:10:59.662Z",
               "EditorCaption": ""
             },
             {
@@ -41,9 +100,35 @@
               "RelativeDocumentMoniker": "GameAssetStore\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "GameAssetStore\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAEQAAAAAAAAAAAAAAFkAAAAHAAAAAAAAAA==",
+              "ViewState": "AgIAAIQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-04-19T20:33:01.004Z",
+              "WhenOpened": "2026-04-20T09:10:20.016Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Assets\\Details.cshtml",
+              "RelativeDocumentMoniker": "GameAssetStore\\Views\\Assets\\Details.cshtml",
+              "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Assets\\Details.cshtml",
+              "RelativeToolTip": "GameAssetStore\\Views\\Assets\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADEAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-20T08:54:04.508Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Assets\\Index.cshtml",
+              "RelativeDocumentMoniker": "GameAssetStore\\Views\\Assets\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Korisnik\\source\\repos\\GameAssetStore\\GameAssetStore\\Views\\Assets\\Index.cshtml",
+              "RelativeToolTip": "GameAssetStore\\Views\\Assets\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-19T22:25:27.797Z",
               "EditorCaption": ""
             }
           ]

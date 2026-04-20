@@ -1,4 +1,5 @@
-﻿@model IEnumerable<GameAssetStore.Models.Asset>
+﻿@using System.Security.Claims
+@model IEnumerable<GameAssetStore.Models.Asset>
 
 @{
     ViewData["Title"] = "Store Assets";
@@ -128,12 +129,18 @@
 
             <div class="asset-actions">
                 <a asp-action="Buy" asp-route-id="@item.Id" class="btn-buy">Buy Now</a>
+
                 <div class="ms-auto">
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <span class="text-muted mx-1">|</span>
+                    @* Provjera: Da li je korisnik ulogovan I da li je on vlasnik *@
+                    @if (User.Identity.IsAuthenticated && item.OwnerId == User.FindFirstValue(ClaimTypes.NameIdentifier))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <span class="text-muted mx-1">|</span>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger">Delete</a>
+                        <span class="text-muted mx-1">|</span>
+                    }
+
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    <span class="text-muted mx-1">|</span>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger">Delete</a>
                 </div>
             </div>
         </div>

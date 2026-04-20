@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using GameAssetStore.Data;
+using GameAssetStore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using GameAssetStore.Data;
-using GameAssetStore.Models;
-using System.Text.Json;
-using System.Text;
-using System.Diagnostics;
 using Microsoft.Build.Evaluation;
+using Microsoft.EntityFrameworkCore;
 using Stripe;
 using Stripe.V2;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace GameAssetStore.Controllers
 {
@@ -64,7 +65,8 @@ namespace GameAssetStore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Description,Price")] Asset asset, IFormFile file)
         {
-
+            ModelState.Remove("Url");
+            ModelState.Remove("OwnerId");
             if (file == null || file.Length == 0)
                 {
                 ModelState.AddModelError(string.Empty, "Please select a file to upload.");
@@ -112,6 +114,7 @@ namespace GameAssetStore.Controllers
                 asset.Url = doc.RootElement.GetProperty("content").TryGetProperty("html_url", out var html)
     ? html.GetString()
     : doc.RootElement.GetProperty("html_url").GetString();
+              asset.OwnerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
                 _context.Add(asset);
                 await _context.SaveChangesAsync();
