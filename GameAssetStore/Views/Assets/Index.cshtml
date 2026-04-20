@@ -1,148 +1,113 @@
-﻿@using System.Security.Claims
-@model IEnumerable<GameAssetStore.Models.Asset>
-
+﻿@model IEnumerable<GameAssetStore.Models.Asset>
+@using System.Security.Claims
 @{
-    ViewData["Title"] = "Store Assets";
+    ViewData["Title"] = "Asset Store";
 }
 
-<style>
-    .store-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 2rem;
-    }
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h1 class="fw-bold text-dark mb-1">Explore Assets</h1>
+            <p class="text-muted">Discover high-quality 3D models for your next project.</p>
+        </div>
+        <a asp-action="Create" class="btn btn-primary btn-lg rounded-pill px-4 shadow-sm">
+            <i class="bi bi-plus-lg me-2"></i>Publish Asset
+        </a>
+    </div>
 
-    .btn-create {
-        background: linear-gradient(45deg, var(--primary-neon), #00d2ff);
-        color: #000;
-        font-weight: 700;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 8px;
-        text-decoration: none;
-        transition: 0.3s;
-    }
+    <div class="row g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 col-lg-4 col-xl-3">
+                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden asset-card">
 
-        .btn-create:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
-            color: #000;
+                    <div class="position-relative">
+                        @if (!string.IsNullOrEmpty(item.ImageUrl))
+                        {
+                            <img src="@item.ImageUrl" class="card-img-top" alt="@item.Name" style="height: 220px; object-fit: cover;">
+                        }
+                        else
+                        {
+                            <div class="bg-dark d-flex align-items-center justify-content-center" style="height: 220px;">
+                                <i class="bi bi-box-seam display-4 text-white-50"></i>
+                            </div>
+                        }
+                        <div class="position-absolute top-0 end-0 m-3">
+                            <span class="badge bg-dark bg-opacity-75 backdrop-blur px-3 py-2 rounded-pill fs-6">
+                                $@item.Price
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <h5 class="card-title fw-bold text-truncate mb-1">@item.Name</h5>
+                        <p class="card-text text-muted small mb-3 text-truncate-2" style="height: 40px;">
+                            @(item.Description?.Length > 60 ? item.Description.Substring(0, 60) + "..." : item.Description)
+                        </p>
+
+                        <div class="d-flex gap-2">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-dark w-100 rounded-3">
+                                <i class="bi bi-eye me-1"></i>View
+                            </a>
+                            <a asp-action="Buy" asp-route-id="@item.Id" class="btn btn-primary w-100 rounded-3 shadow-sm">
+                                <i class="bi bi-cart-plus me-1"></i>Buy
+                            </a>
+                        </div>
+                    </div>
+
+                   
+
+                @if (User.Identity.IsAuthenticated && item.OwnerId == User.FindFirstValue(ClaimTypes.NameIdentifier))
+                    {
+                        <div class="card-footer bg-transparent border-0 pb-3 text-center">
+                            <div class="btn-group">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-link btn-sm text-decoration-none text-muted">
+                                    <i class="bi bi-pencil me-1"></i>Edit
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-link btn-sm text-decoration-none text-danger">
+                                    <i class="bi bi-trash me-1"></i>Delete
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
         }
+    </div>
+</div>
 
-    /* Grid Layout */
-    .asset-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 2rem;
-    }
-
-    /* Individualna Kartica */
+<style>
+    /* Premium efekti za kartice */
     .asset-card {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 1.5rem;
-        transition: 0.3s;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+        border: 1px solid rgba(0,0,0,.05) !important;
     }
 
         .asset-card:hover {
-            background: rgba(255, 255, 255, 0.07);
-            border-color: var(--primary-neon);
-            transform: scale(1.02);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
         }
 
-    .asset-name {
-        font-family: 'Orbitron', sans-serif;
-        font-size: 1.25rem;
-        color: #fff;
-        margin-bottom: 0.5rem;
+    /* Ograničavanje opisa na 2 linije */
+    .text-truncate-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 
-    .asset-desc {
-        color: #a5a5b1;
-        font-size: 0.9rem;
-        margin-bottom: 1.5rem;
-        min-height: 40px;
+    /* Blur efekt za cijenu */
+    .backdrop-blur {
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
     }
 
-    .asset-price {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--primary-neon);
+    .btn-primary {
+        background-color: #0d6efd;
+        border: none;
     }
 
-    .asset-actions {
-        margin-top: 1.5rem;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        padding-top: 1rem;
+    body {
+        background-color: #f8f9fa;
     }
-
-        .asset-actions a {
-            font-size: 0.8rem;
-            text-decoration: none;
-            color: #fff;
-            opacity: 0.6;
-            transition: 0.2s;
-        }
-
-            .asset-actions a:hover {
-                opacity: 1;
-                color: var(--primary-neon);
-            }
-
-    .btn-buy {
-        background: rgba(0, 242, 254, 0.1);
-        border: 1px solid var(--primary-neon);
-        color: var(--primary-neon) !important;
-        padding: 5px 15px;
-        border-radius: 6px;
-        opacity: 1 !important;
-    }
-
-        .btn-buy:hover {
-            background: var(--primary-neon) !important;
-            color: #000 !important;
-        }
 </style>
-
-<div class="store-header">
-    <h1 class="m-0">Available Assets</h1>
-    <a asp-action="Create" class="btn-create text-uppercase">+ Create New</a>
-</div>
-
-<div class="asset-grid">
-    @foreach (var item in Model)
-    {
-        <div class="asset-card">
-            <div>
-                <div class="asset-name">@item.Name</div>
-                <p class="asset-desc">@item.Description</p>
-                <div class="asset-price">@item.Price <small style="font-size: 0.6em">USD</small></div>
-            </div>
-
-            <div class="asset-actions">
-                <a asp-action="Buy" asp-route-id="@item.Id" class="btn-buy">Buy Now</a>
-
-                <div class="ms-auto">
-                    @* Provjera: Da li je korisnik ulogovan I da li je on vlasnik *@
-                    @if (User.Identity.IsAuthenticated && item.OwnerId == User.FindFirstValue(ClaimTypes.NameIdentifier))
-                    {
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                        <span class="text-muted mx-1">|</span>
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger">Delete</a>
-                        <span class="text-muted mx-1">|</span>
-                    }
-
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                </div>
-            </div>
-        </div>
-    }
-</div>

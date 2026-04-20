@@ -1,55 +1,101 @@
-﻿@{
+﻿@model GameAssetStore.Models.Asset
+
+@{
     ViewData["Title"] = "Uplata Uspjela";
 }
 
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card border-0 shadow-lg text-center">
-                <div class="card-header bg-success text-white p-4">
-                    <div class="display-1">
-                        <i class="bi bi-check-circle-fill"></i> <span>✓</span>
+        <div class="col-md-7 col-lg-6">
+            <div class="card border-0 shadow-lg text-center rounded-4 overflow-hidden">
+                <div class="card-header bg-success bg-gradient text-white p-5">
+                    <div class="display-1 mb-3">
+                        <i class="bi bi-check-all"></i>
                     </div>
-                    <h2 class="mt-2">Hvala na kupovini!</h2>
+                    <h2 class="fw-bold">Payment Successful!</h2>
+                    <p class="mb-0 opacity-75">Your new assets are ready for download.</p>
                 </div>
+
                 <div class="card-body p-5">
-                    <p class="lead text-muted">
-                        Vaša transakcija je uspješno obrađena.
-                    </p>
+                    @if (Model != null)
+                    {
+                        <div class="p-4 mb-4 rounded-4 shadow-sm" style="background-color: #f1f3f5; border: 1px solid #dee2e6;">
+                            <h5 class="fw-bold text-dark mb-1">@Model.Name</h5>
+                            <p class="text-muted small mb-3">Premium Digital Asset</p>
 
-                    <p>Digitalni asset je spreman za korištenje. Potvrdu smo poslali na vašu e-mail adresu.</p>
+                            @{
+                                // Pretvaramo: github.com/user/repo/blob/main/file.obj
+                                // u: raw.githubusercontent.com/user/repo/main/file.obj
+                                var rawUrl = Model.Url?.Replace("github.com", "raw.githubusercontent.com").Replace("/blob/", "/");
+                            }
 
-                    <div class="d-grid gap-2">
-                        <a asp-controller="Assets" asp-action="Index" class="btn btn-success btn-lg">
-                            Vrati se u trgovinu
+                            <a href="@rawUrl" download="@Model.Name" class="btn btn-dark btn-lg w-100 rounded-pill shadow mb-2 py-3">
+                                <i class="bi bi-cloud-arrow-down-fill me-2"></i>Download Files
+                            </a>
+                            <small class="text-muted"><i class="bi bi-github me-1"></i> Hosted securely on GitHub</small>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning">
+                            Uspješno ste platili, ali ne možemo učitati podatke o assetu. Provjerite e-mail.
+                        </div>
+                    }
+
+                    <div class="d-grid gap-2 mt-4">
+                        <a asp-controller="Assets" asp-action="Index" class="btn btn-outline-secondary rounded-pill">
+                            <i class="bi bi-shop me-2"></i>Return to Store
                         </a>
-                        <button onclick="window.print()" class="btn btn-link btn-sm text-muted">
-                            Ispiši račun (PDF)
+                        <button onclick="window.print()" class="btn btn-link btn-sm text-muted text-decoration-none">
+                            <i class="bi bi-printer me-1"></i> Print Receipt (PDF)
                         </button>
                     </div>
                 </div>
-                <div class="card-footer bg-white text-muted">
-                    GameAssetStore &copy; @DateTime.Now.Year
+
+                <div class="card-footer bg-light py-3 border-0">
+                    <span class="text-muted small">Transaction ID: <code class="text-primary">@Context.Request.Query["session_id"]</code></span>
                 </div>
             </div>
+
+            <p class="text-center mt-4 text-muted small">
+                GameAssetStore &copy; @DateTime.Now.Year - All Rights Reserved
+            </p>
         </div>
     </div>
 </div>
 
 <style>
     body {
-        background-color: #f8f9fa;
+        background-color: #f4f7f6;
     }
-    .card {
-        border-radius: 15px;
-        overflow: hidden;
-    }
+
     .display-1 {
-        font-size: 5rem;
-        animation: scaleIn 0.5s ease-out;
+        animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
-    @@keyframes scaleIn {
-        0% { transform: scale(0); opacity: 0; }
-        100% { transform: scale(1); opacity: 1; }
+
+    @@keyframes bounceIn {
+        0% {
+            transform: scale(0.3);
+            opacity: 0;
+        }
+
+        50% {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+
+        70% {
+            transform: scale(0.9);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    .btn-dark:hover {
+        background-color: #000;
+        transform: translateY(-2px);
+        transition: all 0.2s;
     }
 </style>

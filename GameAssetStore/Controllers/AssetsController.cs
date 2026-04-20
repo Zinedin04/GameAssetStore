@@ -63,66 +63,92 @@ namespace GameAssetStore.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price")] Asset asset, IFormFile file)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price")] Asset asset, IFormFile file, IFormFile? imageFile)
         {
+            // Postavljanje OwnerId-a i čišćenje modela od polja koja se ručno popunjavaju
+            asset.OwnerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             ModelState.Remove("Url");
+            ModelState.Remove("ImageUrl");
             ModelState.Remove("OwnerId");
+
             if (file == null || file.Length == 0)
-                {
-                ModelState.AddModelError(string.Empty, "Please select a file to upload.");
-                    return View(asset);
-                }
-            
+            {
+                ModelState.AddModelError(string.Empty, "Please select a 3D model file to upload.");
+                return View(asset);
+            }
+
             if (ModelState.IsValid)
             {
-                using var memoryStream = new MemoryStream();
-                await file.CopyToAsync(memoryStream);
-                var fileBytes = memoryStream.ToArray();
-                var base64Content = Convert.ToBase64String(fileBytes);
-
-                string folder;
-                var extension = Path.GetExtension(file.FileName).ToLower();
-                if (extension == ".obj") folder = "assets/obj";
-                else if (extension == ".fbx") folder = "assets/fbx";
-                else folder = "assets/other"; // fallback za druge tipove
-
-                var filePath = $"{folder}/{file.FileName}";
                 var owner = _config["Github:Owner"];
                 var repo = _config["Github:Repo"];
                 var token = _config["Github:Token"];
-
-                var apiUrl = $"https://api.github.com/repos/{owner}/{repo}/contents/{filePath}";
-
-                var body = new
-                {
-                    message = $"Upload{file.FileName} from web app",
-                    content = base64Content
-                };
 
                 var client = _clientFactory.CreateClient();
                 client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
                 client.DefaultRequestHeaders.Add("User-Agent", "GameAssetApp");
 
-                var json = JsonSerializer.Serialize(body);
-                var response = await client.PutAsync(apiUrl, new StringContent(json, Encoding.UTF8, "application/json"));
-                var resultJson = await response.Content.ReadAsStringAsync();
+                // --- 1. UPLOAD MODELA ---
+                var extension = Path.GetExtension(file.FileName).ToLower();
+                string folder = extension switch
+                {
+                    ".obj" => "assets/obj",
+                    ".fbx" => "assets/fbx",
+                    _ => "assets/other"
+                };
 
-                if (!response.IsSuccessStatusCode)
-                    return BadRequest($"Github upload failed: {resultJson}");  
+                var filePath = $"{folder}/{Guid.NewGuid()}_{file.FileName}";
+                var modelUrl = $"https://api.github.com/repos/{owner}/{repo}/contents/{filePath}";
 
-                using var doc = JsonDocument.Parse(resultJson);
-                asset.Url = doc.RootElement.GetProperty("content").TryGetProperty("html_url", out var html)
-    ? html.GetString()
-    : doc.RootElement.GetProperty("html_url").GetString();
-              asset.OwnerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                using (var ms = new MemoryStream())
+                {
+                    await file.CopyToAsync(ms);
+                    var modelBody = new
+                    {
+                        message = $"Upload model {file.FileName}",
+                        content = Convert.ToBase64String(ms.ToArray())
+                    };
+
+                    var response = await client.PutAsJsonAsync(modelUrl, modelBody);
+                    if (!response.IsSuccessStatusCode)
+                        return BadRequest("GitHub Model Upload Failed.");
+
+                    var resJson = await response.Content.ReadAsStringAsync();
+                    using var doc = JsonDocument.Parse(resJson);
+                    asset.Url = doc.RootElement.GetProperty("content").GetProperty("html_url").GetString();
+                }
+
+                // --- 2. UPLOAD SLIKE (Opcionalno) ---
+                if (imageFile != null && imageFile.Length > 0)
+                {
+                    var imgExt = Path.GetExtension(imageFile.FileName).ToLower();
+                    var imgPath = $"thumbnails/{Guid.NewGuid()}{imgExt}";
+                    var imgApiUrl = $"https://api.github.com/repos/{owner}/{repo}/contents/{imgPath}";
+
+                    using (var ms = new MemoryStream())
+                    {
+                        await imageFile.CopyToAsync(ms);
+                        var imgBody = new
+                        {
+                            message = $"Upload thumb for {asset.Name}",
+                            content = Convert.ToBase64String(ms.ToArray())
+                        };
+
+                        var imgResponse = await client.PutAsJsonAsync(imgApiUrl, imgBody);
+                        if (imgResponse.IsSuccessStatusCode)
+                        {
+                            // Koristimo raw.githubusercontent.com da bi slika bila direktno vidljiva u browseru
+                            asset.ImageUrl = $"https://raw.githubusercontent.com/{owner}/{repo}/main/{imgPath}";
+                        }
+                    }
+                }
 
                 _context.Add(asset);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(asset);
         }
-
         // GET: Assets/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -138,88 +164,119 @@ namespace GameAssetStore.Controllers
             }
             return View(asset);
         }
-
-        // POST: Assets/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Url,Price")] Asset asset)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Url,ImageUrl,Price,OwnerId")] Asset asset, IFormFile? file, IFormFile? imageFile)
         {
-            if (id != asset.Id)
-            {
-                return NotFound();
-            }
+            if (id != asset.Id) return NotFound();
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var newFile = Request.Form.Files.FirstOrDefault();
-                    if (newFile == null || newFile.Length == 0)
-                    {
-                        return BadRequest("No file selected");
-                    }
                     var owner = _config["Github:Owner"];
                     var repo = _config["Github:Repo"];
                     var token = _config["Github:Token"];
-
-                    var relativePath = asset.Url.Split("blob/main").Last().TrimStart('/');
-
-                    var apiUrl = $"https://api.github.com/repos/{owner}/{repo}/contents/{relativePath}";
 
                     var client = _clientFactory.CreateClient();
                     client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
                     client.DefaultRequestHeaders.Add("User-Agent", "GameAssetApp");
 
-                    var getResponse = await client.GetAsync(apiUrl);
-                    if (!getResponse.IsSuccessStatusCode)
+                    // --- 1. UPDATE 3D MODELA ---
+                    if (file != null && file.Length > 0)
                     {
-                        return BadRequest($"Cannot get file info: {await getResponse.Content.ReadAsStringAsync()}");
+                        // Izvuci SHA i putanju starog fajla iz trenutnog URL-a
+                        var oldRelativePath = asset.Url.Split("blob/main/").Last();
+                        var oldApiUrl = $"https://api.github.com/repos/{owner}/{repo}/contents/{oldRelativePath}";
+
+                        // Nova putanja (bazirana na novom fajlu)
+                        var extension = Path.GetExtension(file.FileName).ToLower();
+                        string folder = extension == ".obj" ? "assets/obj" : (extension == ".fbx" ? "assets/fbx" : "assets/other");
+                        var newRelativePath = $"{folder}/{Guid.NewGuid()}_{file.FileName}";
+                        var newApiUrl = $"https://api.github.com/repos/{owner}/{repo}/contents/{newRelativePath}";
+
+                        // Dohvati SHA starog fajla da ga možemo obrisati/zamijeniti
+                        var getResponse = await client.GetAsync(oldApiUrl);
+                        if (getResponse.IsSuccessStatusCode)
+                        {
+                            var json = await getResponse.Content.ReadAsStringAsync();
+                            using var doc = JsonDocument.Parse(json);
+                            var sha = doc.RootElement.GetProperty("sha").GetString();
+
+                            using var ms = new MemoryStream();
+                            await file.CopyToAsync(ms);
+                            var base64Content = Convert.ToBase64String(ms.ToArray());
+
+                            // Ako se putanja promijenila (npr. drugi format ili ime), obriši stari, stavi novi
+                            if (oldRelativePath != newRelativePath)
+                            {
+                                // Brisanje starog
+                                var deleteBody = new { message = $"Delete old file {oldRelativePath}", sha = sha };
+                                await client.SendAsync(new HttpRequestMessage(HttpMethod.Delete, oldApiUrl)
+                                {
+                                    Content = new StringContent(JsonSerializer.Serialize(deleteBody), Encoding.UTF8, "application/json")
+                                });
+
+                                // Kreiranje novog
+                                var createBody = new { message = $"Upload new version {file.FileName}", content = base64Content };
+                                var createRes = await client.PutAsJsonAsync(newApiUrl, createBody);
+                                if (createRes.IsSuccessStatusCode)
+                                {
+                                    var resJson = await createRes.Content.ReadAsStringAsync();
+                                    using var resDoc = JsonDocument.Parse(resJson);
+                                    asset.Url = resDoc.RootElement.GetProperty("content").GetProperty("html_url").GetString();
+                                }
+                            }
+                            else
+                            {
+                                // Ako je putanja ista, samo klasični update sa SHA
+                                var updateBody = new { message = $"Update {file.FileName}", content = base64Content, sha = sha };
+                                var updateRes = await client.PutAsJsonAsync(oldApiUrl, updateBody);
+                                if (updateRes.IsSuccessStatusCode)
+                                {
+                                    var resJson = await updateRes.Content.ReadAsStringAsync();
+                                    using var resDoc = JsonDocument.Parse(resJson);
+                                    asset.Url = resDoc.RootElement.GetProperty("content").GetProperty("html_url").GetString();
+                                }
+                            }
+                        }
                     }
 
-                    var json = await getResponse.Content.ReadAsStringAsync();
-                    using var doc = JsonDocument.Parse(json);
-                    var sha = doc.RootElement.GetProperty("sha").GetString();
-
-                    using var memoryStream = new MemoryStream();
-                    await newFile.CopyToAsync(memoryStream);
-                    var fileBytes = memoryStream.ToArray();
-                    var base64Content = Convert.ToBase64String(fileBytes);
-
-                    var updateBody = new
+                    // --- 2. UPDATE SLIKE (THUMBNAILA) ---
+                    if (imageFile != null && imageFile.Length > 0)
                     {
-                        message = $"Update {relativePath} via web app",
-                        content = base64Content,
-                        sha = sha
-                    };
-                    var updateJson = JsonSerializer.Serialize(updateBody);
-                    var updateRequest = new HttpRequestMessage
-                    {
-                        Method = HttpMethod.Put,
-                        RequestUri = new Uri(apiUrl),
-                        Content = new StringContent(updateJson, Encoding.UTF8, "application/json")
-                    };
+                        var imgExt = Path.GetExtension(imageFile.FileName).ToLower();
+                        var imgPath = $"thumbnails/{Guid.NewGuid()}{imgExt}";
+                        var imgApiUrl = $"https://api.github.com/repos/{owner}/{repo}/contents/{imgPath}";
 
-                    var updateResponse = await client.SendAsync(updateRequest);
-                    var updateResult = await updateResponse.Content.ReadAsStringAsync();
+                        using (var ms = new MemoryStream())
+                        {
+                            await imageFile.CopyToAsync(ms);
+                            var imgBody = new
+                            {
+                                message = $"Update thumbnail for {asset.Name}",
+                                content = Convert.ToBase64String(ms.ToArray())
+                            };
 
-                    if (!updateResponse.IsSuccessStatusCode)
-                        return BadRequest($"GitHub update failed: {updateResult}");
+                            var imgResponse = await client.PutAsJsonAsync(imgApiUrl, imgBody);
+                            if (imgResponse.IsSuccessStatusCode)
+                            {
+                                // Update-aj ImageUrl u asset objektu (obavezno raw link)
+                                asset.ImageUrl = $"https://raw.githubusercontent.com/{owner}/{repo}/main/{imgPath}";
+                            }
+                        }
+                        // Opcionalno: Ovdje bi mogao dodati i kod da obriše staru sliku sa GitHub-a, 
+                        // ali pošto su slike male, nije kritično kao za modele.
+                    }
 
+                    // 3. SPASI SVE U BAZU
                     _context.Update(asset);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AssetExists(asset.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    if (!AssetExists(asset.Id)) return NotFound();
+                    else throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -337,7 +394,12 @@ namespace GameAssetStore.Controllers
                 Quantity = 1,
             }
         },
-                Mode = "payment"
+                Mode = "payment",
+
+                Metadata = new Dictionary<string, string>
+        {
+            { "AssetId", asset.Id.ToString() }
+        }
             };
 
             var service = new Stripe.Checkout.SessionService();
@@ -352,7 +414,13 @@ namespace GameAssetStore.Controllers
             var service = new Stripe.Checkout.SessionService();
             var session = await service.GetAsync(session_id);
 
-            // Ovdje provjeriš bazu ili session
+            // Izvlačimo AssetId iz Stripe metapodataka
+            if (session.Metadata.TryGetValue("AssetId", out var assetIdStr) && int.TryParse(assetIdStr, out var assetId))
+            {
+                var asset = await _context.Asset.FindAsync(assetId);
+                return View(asset); // Šaljemo asset u View
+            }
+
             return View();
         }
     }

@@ -8,6 +8,7 @@
         public string Description { get; set; }
         public string? Url { get; set; }
         public float Price { get; set; }
+        public string? ImageUrl { get; set; }
 
     }
 }
