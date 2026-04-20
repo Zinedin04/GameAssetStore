@@ -6,10 +6,10 @@ I developed this project as a hands-on deep dive into **API integration**, focus
 
 ## Key Features
 
-* **GitHub API Integration:** Instead of using a traditional file server, I implemented the GitHub API (via Octokit) to handle asset delivery. Purchased assets are automatically managed within private GitHub repositories, ensuring version control and secure access.
+* **GitHub API Integration:** Instead of using a traditional file server, I implemented the GitHub API to handle asset delivery. Purchased assets are automatically managed within private GitHub repositories, ensuring version control and secure access.
 * **Stripe Payment Gateway:** To handle financial transactions safely, I integrated the Stripe API. The system supports secure card processing, real-time payment validation, and automated invoice generation.
 * **Asset Management:** A comprehensive catalog where users can browse, filter, and purchase 2D/3D models, scripts, and audio effects.
-* **Database Management:** The application uses **Microsoft SQL Server** (hosted on SmarterASP.NET) to manage user profiles, product metadata, and transaction history.
+* **Database Management:** The application uses **Microsoft SQL Server** (hosted on MonsterASP.NET) to manage user profiles, product metadata, and transaction history.
 
 ## Learning Objectives
 
@@ -22,9 +22,9 @@ The primary goal of this project was to master the consumption of complex REST A
 ## Tech Stack
 
 - **Backend:** .NET (ASP.NET Core MVC / Web API)
-- **Database:** Microsoft SQL Server (SmarterASP.NET)
+- **Database:** Microsoft SQL Server (MonsterASP.NET)
 - **Payments:** Stripe API
-- **Storage & Versioning:** GitHub API (Octokit)
+- **Storage & Versioning:** GitHub API 
 - **Frontend:** HTML5, CSS3, JavaScript (Bootstrap / Razor Pages)
 
 ---
