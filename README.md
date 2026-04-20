@@ -1,1 +1,31 @@
-Evo prevoda i prilagođene verzije tvog teksta na engleskom jeziku. Ton je profesionalan, ali naglašava tvoju inicijativu za učenjem i praktičnim savladavanjem API integracija.Game Asset StoreWelcome to Game Asset Store, a web application built using the .NET ecosystem designed to bridge the gap between game developers and high-quality digital assets. I developed this project as a hands-on deep dive into API integration, focusing on how to orchestrate multiple external services to create a seamless, automated workflow.Core FunctionalitiesGitHub API Integration: Moving away from traditional file server storage, I implemented the GitHub API (via Octokit) to handle asset delivery. Once a purchase is completed, assets are automatically managed within private GitHub repositories, ensuring version control and secure access for the buyer.Stripe Payment Gateway: To handle financial transactions safely, I integrated the Stripe API. The system supports secure card processing, real-time payment validation, and automated invoice generation.Asset Management: A comprehensive catalog where users can browse, filter, and purchase 2D/3D models, scripts, and audio effects tailored for game development.Database Management: The application uses Microsoft SQL Server (hosted on SmarterASP.NET) to manage user profiles, product metadata, and transaction history.Learning ObjectivesThe primary goal of this project was to master the consumption of complex REST APIs and explore the logic of service-oriented architecture. By building this, I gained practical experience in:Asynchronous programming in .NET for handling external requests.Securely managing API keys and environment secrets.Implementing webhook listeners for payment confirmation.Automating repository management through code.Technology StackLayerTechnologies UsedBackend.NET (ASP.NET Core MVC / Web API)DatabaseMicrosoft SQL ServerPaymentsStripe APIStorage & VersioningGitHub API (Octokit)FrontendHTML5, CSS3, JavaScript (Bootstrap / Razor Pages)
+# Game Asset Store
+
+Welcome to **Game Asset Store**, a web application built using the **.NET ecosystem** designed to bridge the gap between game developers and high-quality digital assets. 
+
+I developed this project as a hands-on deep dive into **API integration**, focusing on how to orchestrate multiple external services to create a seamless, automated workflow.
+
+## Key Features
+
+* **GitHub API Integration:** Instead of using a traditional file server, I implemented the GitHub API (via Octokit) to handle asset delivery. Purchased assets are automatically managed within private GitHub repositories, ensuring version control and secure access.
+* **Stripe Payment Gateway:** To handle financial transactions safely, I integrated the Stripe API. The system supports secure card processing, real-time payment validation, and automated invoice generation.
+* **Asset Management:** A comprehensive catalog where users can browse, filter, and purchase 2D/3D models, scripts, and audio effects.
+* **Database Management:** The application uses **Microsoft SQL Server** (hosted on SmarterASP.NET) to manage user profiles, product metadata, and transaction history.
+
+## Learning Objectives
+
+The primary goal of this project was to master the consumption of complex REST APIs and explore the logic of service-oriented architecture. By building this, I gained practical experience in:
+* Asynchronous programming in .NET for handling external requests.
+* Securely managing API keys and environment secrets.
+* Implementing webhook listeners for payment confirmation.
+* Automating repository management through code.
+
+## Tech Stack
+
+- **Backend:** .NET (ASP.NET Core MVC / Web API)
+- **Database:** Microsoft SQL Server (SmarterASP.NET)
+- **Payments:** Stripe API
+- **Storage & Versioning:** GitHub API (Octokit)
+- **Frontend:** HTML5, CSS3, JavaScript (Bootstrap / Razor Pages)
+
+---
+*This project was developed as part of my personal learning journey to master API calls and backend automation.*
